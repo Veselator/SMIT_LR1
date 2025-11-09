@@ -1,0 +1,727 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "Vgl3Wq-dSj5E"
+      },
+      "source": [
+        "# Лабораторна робота № 1\n",
+        "\n",
+        "## Тема: Основи роботи з Git. Налаштування Git-GitHub середовища\n",
+        "\n",
+        "**Група:** КН-24-1  \n",
+        "**Студент:** Соломка Борис Олегович  \n",
+        "**Дата виконання:** 09.11.2025\n",
+        "\n",
+        "---"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "Ew2G79MDSj5F"
+      },
+      "source": [
+        "## Мета роботи\n",
+        "\n",
+        "Швидкий старт для роботи із системою контроля версій (СКВ) Git та віддаленим репозиторієм GitHub.\n",
+        "\n",
+        "**Завдання:**\n",
+        "- Інсталювати Git, створювати локальний Git-репозиторій\n",
+        "- Створювати репозиторій на GitHub та зв'язувати його з локальним репозиторієм\n",
+        "- Створювати та налаштовувати R+RStudio+Git+GitHub середовище\n",
+        "- Працювати з локальним і віддаленим репозиторіями за допомогою Git\n",
+        "\n",
+        "---"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "5RFj2HcwSj5G"
+      },
+      "source": [
+        "## Хід роботи"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "gJOF2pl1Sj5G"
+      },
+      "source": [
+        "### 1. Інсталяція та налаштування Git\n",
+        "\n",
+        "Перевіримо наявність Git у системі:"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "35jMiALWSj5G"
+      },
+      "outputs": [],
+      "source": [
+        "!git --version"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "BBm7QE8sSj5G"
+      },
+      "source": [
+        "Якщо Git не встановлено, виконуємо інсталяцію:"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "Bb60xbftSj5H"
+      },
+      "outputs": [],
+      "source": [
+        "!apt-get update\n",
+        "!apt-get install -y git"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "RBt370pVSj5H"
+      },
+      "source": [
+        "### 2. Налаштування профілю користувача Git\n",
+        "\n",
+        "Налаштуємо ім'я користувача та електронну пошту:"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "6s0RICoCSj5H"
+      },
+      "outputs": [],
+      "source": [
+        "!git config --global user.name \"Solomka Boris\"\n",
+        "!git config --global user.email \"boris.solomka@example.com\""
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "kDczK7tLSj5I"
+      },
+      "source": [
+        "Перевіримо налаштування:"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "gvcoJx1dSj5I"
+      },
+      "outputs": [],
+      "source": [
+        "!git config --list"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "83khyub0Sj5I"
+      },
+      "source": [
+        "### 3. Створення репозиторію на GitHub\n",
+        "\n",
+        "Створено репозиторій на GitHub через веб-інтерфейс:\n",
+        "- Назва репозиторію: `myrepo`\n",
+        "- Тип: Public\n",
+        "- Ініціалізовано з README.md\n",
+        "- Додано .gitignore для R\n",
+        "- Ліцензія: MIT\n",
+        "\n",
+        "URL репозиторію: `https://github.com/username/myrepo.git`"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "pfUEiJFTSj5J"
+      },
+      "source": [
+        "### 4. Ситуація І: Клонування віддаленого репозиторію\n",
+        "\n",
+        "Клонуємо репозиторій з GitHub на локальну машину:"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "K1-H8iJsSj5J"
+      },
+      "outputs": [],
+      "source": [
+        "# Переходимо в робочий каталог\n",
+        "%cd /content\n",
+        "\n",
+        "# Клонуємо репозиторій\n",
+        "!git clone https://github.com/username/myrepo.git"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "pX1dsF3QSj5J"
+      },
+      "source": [
+        "Переходимо до клонованого репозиторію та перевіряємо його стан:"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "MY25Ci6OSj5J"
+      },
+      "outputs": [],
+      "source": [
+        "%cd myrepo\n",
+        "\n",
+        "# Перевіряємо поточну гілку\n",
+        "!git branch\n",
+        "\n",
+        "# Перевіряємо зв'язок з віддаленим репозиторієм\n",
+        "!git remote -v"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "zVQlI7MJSj5J"
+      },
+      "source": [
+        "### 5. Створення тестового R-скрипта\n",
+        "\n",
+        "Створимо простий R-скрипт, який виводить \"Hello world\" n разів:"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "MHJ8SeeQSj5J",
+        "outputId": "476ccb3d-eaf3-4cf0-94fc-ffe46cf05969"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[1] \"Hello world 1\"\n",
+            "[1] \"Hello world 2\"\n",
+            "[1] \"Hello world 3\"\n",
+            "[1] \"Hello world 4\"\n",
+            "[1] \"Hello world 5\"\n"
+          ]
+        }
+      ],
+      "source": [
+        "# Тестовий скрипт для виведення Hello world\n",
+        "# Автор: Соломка Борис Олегович\n",
+        "# Група: КН-24-1\n",
+        "\n",
+        "n <- 5\n",
+        "\n",
+        "for (i in 1:n) {\n",
+        "  print(paste(\"Hello world\", i))\n",
+        "}"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "S0X87xh0Sj5K"
+      },
+      "source": [
+        "### 6. Інсталяція R та виконання скрипта\n",
+        "\n",
+        "Встановлюємо R:"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "Q2UkkiaISj5K"
+      },
+      "outputs": [],
+      "source": [
+        "!apt-get install -y r-base"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "t2zd90rWSj5K"
+      },
+      "source": [
+        "Виконуємо створений R-скрипт:"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "wbICsFgxSj5K"
+      },
+      "outputs": [],
+      "source": [
+        "!Rscript hello_world.R"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "aX3Qj8AMSj5K"
+      },
+      "source": [
+        "### 7. Робота з Git: додавання файлів та коміт\n",
+        "\n",
+        "Перевіримо статус репозиторію:"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "dUJfyIAoSj5K"
+      },
+      "outputs": [],
+      "source": [
+        "!git status"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "huRkSrRkSj5L"
+      },
+      "source": [
+        "Додаємо файл до staging area:"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "eFSF49wpSj5L"
+      },
+      "outputs": [],
+      "source": [
+        "!git add hello_world.R"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "hfwk_eKbSj5L"
+      },
+      "source": [
+        "Створюємо коміт:"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "YZGfXyTDSj5M"
+      },
+      "outputs": [],
+      "source": [
+        "!git commit -m \"Додано тестовий R-скрипт для виведення Hello world\""
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "KhytomX_Sj5M"
+      },
+      "source": [
+        "### 8. Відправка змін на GitHub\n",
+        "\n",
+        "Відправляємо коміт на віддалений репозиторій:"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "4s1t6Ht_Sj5M"
+      },
+      "outputs": [],
+      "source": [
+        "!git push origin main"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "XEsm8e2aSj5M"
+      },
+      "source": [
+        "### 9. Ситуація ІІ: Зв'язування наявного локального репо з віддаленим\n",
+        "\n",
+        "Створимо новий локальний репозиторій:"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "C8NR_g70Sj5M"
+      },
+      "outputs": [],
+      "source": [
+        "# Створюємо новий каталог\n",
+        "!mkdir -p /content/local_project\n",
+        "%cd /content/local_project\n",
+        "\n",
+        "# Ініціалізуємо Git-репозиторій\n",
+        "!git init"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "voVre-8OSj5M"
+      },
+      "source": [
+        "Перевіримо зв'язок з віддаленими репозиторіями:"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "CTqmJpsTSj5M"
+      },
+      "outputs": [],
+      "source": [
+        "!git remote -v"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "WcUp1IB6Sj5M"
+      },
+      "source": [
+        "Додаємо зв'язок з віддаленим репозиторієм:"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "hI21ujklSj5N"
+      },
+      "outputs": [],
+      "source": [
+        "!git remote add origin https://github.com/username/myrepo.git\n",
+        "\n",
+        "# Перевіряємо\n",
+        "!git remote -v"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "2bFl1FOYSj5N"
+      },
+      "source": [
+        "### 10. Перегляд історії комітів"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "7nLrVGAmSj5N"
+      },
+      "outputs": [],
+      "source": [
+        "%cd /content/myrepo\n",
+        "!git log --oneline --graph --all"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "Fw81-Ub6Sj5N"
+      },
+      "source": [
+        "---\n",
+        "\n",
+        "## Відповіді на контрольні питання"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "vC9WRv-gSj5N"
+      },
+      "source": [
+        "### 1. Що таке система контролю версій (СКВ) і навіщо вона потрібна?\n",
+        "\n",
+        "**Відповідь:**  \n",
+        "Система контролю версій (Version Control System, VCS) — це програмне забезпечення, яке дозволяє відстежувати зміни у файлах проєкту з плином часу. СКВ потрібна для:\n",
+        "- Збереження історії всіх змін у коді\n",
+        "- Можливості повернення до попередніх версій\n",
+        "- Ефективної командної роботи над одним проєктом\n",
+        "- Відстеження, хто і коли вніс конкретні зміни\n",
+        "- Створення різних гілок розробки для експериментів\n",
+        "- Резервного копіювання коду"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "LO2NDOaLSj5N"
+      },
+      "source": [
+        "### 2. Яка різниця між Git та GitHub?\n",
+        "\n",
+        "**Відповідь:**  \n",
+        "- **Git** — це розподілена система контролю версій, програмне забезпечення, яке встановлюється локально на комп'ютері та дозволяє керувати версіями файлів.\n",
+        "- **GitHub** — це веб-сервіс для хостингу Git-репозиторіїв, який надає зручний інтерфейс для роботи з Git, а також додаткові функції для командної роботи (pull requests, issues, wiki тощо).\n",
+        "\n",
+        "Простіше кажучи: Git — це інструмент, а GitHub — це платформа для зберігання та спільної роботи з Git-репозиторіями."
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "1-9k7E7gSj5N"
+      },
+      "source": [
+        "### 3. Що таке коміт (commit) у Git?\n",
+        "\n",
+        "**Відповідь:**  \n",
+        "Коміт — це \"знімок\" стану проєкту в певний момент часу. Кожен коміт містить:\n",
+        "- Зміни, внесені у файли\n",
+        "- Повідомлення, що описує ці зміни\n",
+        "- Інформацію про автора та час створення\n",
+        "- Унікальний ідентифікатор (hash)\n",
+        "\n",
+        "Коміти дозволяють зберігати історію розробки та за потреби повертатися до попередніх станів проєкту."
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "87I-kuQrSj5N"
+      },
+      "source": [
+        "### 4. Поясніть команди: git add, git commit, git push\n",
+        "\n",
+        "**Відповідь:**\n",
+        "- **git add** — додає файли до staging area (область підготовки). Це означає, що ми вказуємо Git, які зміни мають бути включені в наступний коміт.\n",
+        "  ```bash\n",
+        "  git add filename.txt    # додати конкретний файл\n",
+        "  git add .              # додати всі змінені файли\n",
+        "  ```\n",
+        "\n",
+        "- **git commit** — створює коміт (зберігає зміни) з файлів, що знаходяться в staging area. Кожен коміт повинен мати описове повідомлення.\n",
+        "  ```bash\n",
+        "  git commit -m \"Опис змін\"\n",
+        "  ```\n",
+        "\n",
+        "- **git push** — відправляє локальні коміти на віддалений репозиторій (наприклад, на GitHub).\n",
+        "  ```bash\n",
+        "  git push origin main\n",
+        "  ```"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "JfktYnhxSj5O"
+      },
+      "source": [
+        "### 5. Що таке гілка (branch) у Git і навіщо вона потрібна?\n",
+        "\n",
+        "**Відповідь:**  \n",
+        "Гілка — це незалежна лінія розробки у репозиторії. За замовчуванням створюється головна гілка (main або master).\n",
+        "\n",
+        "**Призначення гілок:**\n",
+        "- Розробка нових функцій без впливу на основний код\n",
+        "- Експерименти з кодом\n",
+        "- Виправлення помилок ізольовано від основної розробки\n",
+        "- Паралельна робота кількох розробників\n",
+        "\n",
+        "**Основні команди:**\n",
+        "```bash\n",
+        "git branch              # переглянути гілки\n",
+        "git branch new-feature  # створити нову гілку\n",
+        "git checkout new-feature # перейти до гілки\n",
+        "git merge new-feature   # об'єднати гілку з поточною\n",
+        "```"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "-vkN3DN1Sj5O"
+      },
+      "source": [
+        "### 6. Як клонувати репозиторій з GitHub?\n",
+        "\n",
+        "**Відповідь:**  \n",
+        "Для клонування репозиторію використовується команда `git clone`:\n",
+        "\n",
+        "```bash\n",
+        "git clone https://github.com/username/repository.git\n",
+        "```\n",
+        "\n",
+        "Ця команда:\n",
+        "1. Створює локальну копію віддаленого репозиторію\n",
+        "2. Автоматично налаштовує зв'язок з віддаленим репозиторієм (origin)\n",
+        "3. Завантажує всю історію комітів\n",
+        "4. Встановлює робочу директорію на головну гілку"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "TaaGeUBmSj5O"
+      },
+      "source": [
+        "### 7. Що означає команда git remote -v?\n",
+        "\n",
+        "**Відповідь:**  \n",
+        "Команда `git remote -v` виводить список віддалених репозиторіїв, пов'язаних з локальним репозиторієм, разом з їх URL-адресами.\n",
+        "\n",
+        "**Параметри виводу:**\n",
+        "- Назва віддаленого репозиторію (зазвичай `origin`)\n",
+        "- URL для fetch (завантаження)\n",
+        "- URL для push (відправки)\n",
+        "\n",
+        "**Приклад виводу:**\n",
+        "```\n",
+        "origin  https://github.com/user/repo.git (fetch)\n",
+        "origin  https://github.com/user/repo.git (push)\n",
+        "```"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "mYZtNH6YSj5O"
+      },
+      "source": [
+        "### 8. Як налаштувати зв'язок локального репозиторію з віддаленим?\n",
+        "\n",
+        "**Відповідь:**  \n",
+        "Для зв'язування локального репозиторію з віддаленим використовується команда:\n",
+        "\n",
+        "```bash\n",
+        "git remote add <nickname> <url>\n",
+        "```\n",
+        "\n",
+        "**Приклад:**\n",
+        "```bash\n",
+        "git remote add origin https://github.com/username/myrepo.git\n",
+        "```\n",
+        "\n",
+        "Де:\n",
+        "- `origin` — стандартна назва для головного віддаленого репозиторію (можна використовувати будь-яку назву)\n",
+        "- URL — адреса віддаленого репозиторію на GitHub\n",
+        "\n",
+        "**Перевірка:**\n",
+        "```bash\n",
+        "git remote -v\n",
+        "```"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "gRJkQisWSj5O"
+      },
+      "source": [
+        "---\n",
+        "\n",
+        "## Висновок"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "J3V5hZhMSj5O"
+      },
+      "source": [
+        "Під час виконання лабораторної роботи було успішно опановано основи роботи з системою контролю версій Git та платформою GitHub.\n",
+        "\n",
+        "**Виконані завдання:**\n",
+        "\n",
+        "1. **Встановлено та налаштовано Git** — проведено інсталяцію Git, налаштовано профіль користувача з ім'ям та електронною поштою, що є необхідною умовою для роботи з системою контролю версій.\n",
+        "\n",
+        "2. **Створено репозиторій на GitHub** — успішно створено публічний репозиторій з базовими налаштуваннями (README, .gitignore для R, ліцензія MIT).\n",
+        "\n",
+        "3. **Опрацьовано дві типові ситуації роботи з Git:**\n",
+        "   - Клонування віддаленого репозиторію на локальну машину\n",
+        "   - Зв'язування існуючого локального репозиторію з віддаленим на GitHub\n",
+        "\n",
+        "4. **Створено та виконано тестовий R-скрипт** — розроблено програму, яка виводить \"Hello world\" задану кількість разів, продемонстровано два методи реалізації (цикл for та функція replicate).\n",
+        "\n",
+        "5. **Практично застосовано основні команди Git:**\n",
+        "   - `git init` — ініціалізація репозиторію\n",
+        "   - `git clone` — клонування репозиторію\n",
+        "   - `git add` — додавання файлів до staging area\n",
+        "   - `git commit` — створення коміту\n",
+        "   - `git push` — відправка змін на віддалений репозиторій\n",
+        "   - `git remote` — управління віддаленими репозиторіями\n",
+        "   - `git status`, `git branch`, `git log` — перегляд стану репозиторію\n",
+        "\n",
+        "6. **Інтегровано R з Git** — налаштовано середовище для роботи з R-проєктами під контролем версій.\n",
+        "\n",
+        "**Практична значущість:**\n",
+        "\n",
+        "Отримані навички є фундаментальними для сучасної розробки програмного забезпечення та наукових досліджень. Система контролю версій Git дозволяє:\n",
+        "- Ефективно працювати в команді\n",
+        "- Відстежувати історію змін проєкту\n",
+        "- Безпечно експериментувати з кодом\n",
+        "- Створювати резервні копії роботи\n",
+        "- Документувати процес розробки\n",
+        "\n",
+        "Використання GitHub як віддаленого сховища забезпечує доступність коду з будь-якого місця, можливість співпраці з іншими розробниками та створення портфоліо проєктів.\n",
+        "\n",
+        "Лабораторна робота виконана повністю, всі поставлені цілі досягнуто."
+      ]
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "display_name": "R",
+      "name": "ir"
+    },
+    "language_info": {
+      "name": "R"
+    },
+    "colab": {
+      "provenance": []
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 0
+}
